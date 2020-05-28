@@ -1,0 +1,9 @@
+build:
+  - echo hello world
+package:
+  - FROM nginx
+dev:
+  build:
+    - echo hello world dev
+  package:
+    - FROM nginx:1

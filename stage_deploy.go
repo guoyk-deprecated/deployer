@@ -67,14 +67,14 @@ func runDeployStage(opts Options) (err error) {
 		container := PatchInitContainer{
 			Image:           opts.ImageName,
 			Name:            opts.Container,
-			ImagePullPolicy: "always",
+			ImagePullPolicy: "Always",
 		}
 		p.Spec.Template.Spec.InitContainers = append(p.Spec.Template.Spec.InitContainers, container)
 	} else {
 		container := PatchContainer{
 			Image:           opts.ImageName,
 			Name:            opts.Container,
-			ImagePullPolicy: "always",
+			ImagePullPolicy: "Always",
 		}
 		container.Resources.Requests.CPU = opts.RequestsCPU
 		container.Resources.Requests.Memory = opts.RequestsMEM

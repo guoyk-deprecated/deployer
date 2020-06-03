@@ -27,9 +27,10 @@ type Patch struct {
 }
 
 type PatchContainer struct {
-	Image     string `json:"image"`
-	Name      string `json:"name"`
-	Resources struct {
+	Image           string `json:"image"`
+	Name            string `json:"name"`
+	ImagePullPolicy string `json:"imagePullPolicy,omitempty"`
+	Resources       struct {
 		Limits struct {
 			CPU    string `json:"cpu,omitempty"`
 			Memory string `json:"memory,omitempty"`
@@ -42,8 +43,9 @@ type PatchContainer struct {
 }
 
 type PatchInitContainer struct {
-	Image string `json:"image"`
-	Name  string `json:"name"`
+	Image           string `json:"image"`
+	Name            string `json:"name"`
+	ImagePullPolicy string `json:"imagePullPolicy,omitempty"`
 }
 
 type PatchImagePullSecret struct {
@@ -63,14 +65,16 @@ func runDeployStage(opts Options) (err error) {
 	}
 	if opts.IsInit {
 		container := PatchInitContainer{
-			Image: opts.ImageName,
-			Name:  opts.Container,
+			Image:           opts.ImageName,
+			Name:            opts.Container,
+			ImagePullPolicy: "always",
 		}
 		p.Spec.Template.Spec.InitContainers = append(p.Spec.Template.Spec.InitContainers, container)
 	} else {
 		container := PatchContainer{
-			Image: opts.ImageName,
-			Name:  opts.Container,
+			Image:           opts.ImageName,
+			Name:            opts.Container,
+			ImagePullPolicy: "always",
 		}
 		container.Resources.Requests.CPU = opts.RequestsCPU
 		container.Resources.Requests.Memory = opts.RequestsMEM

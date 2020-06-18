@@ -152,7 +152,12 @@ func setup() (err error) {
 	}
 
 	// generate image name
-	opts.ImageName = path.Join(optRegistry, optBaseImageName+":"+optEnv)
+	buildNumber := os.Getenv("BUILD_NUMBER")
+	if buildNumber == "" {
+		opts.ImageName = path.Join(optRegistry, optBaseImageName+":"+optEnv)
+	} else {
+		opts.ImageName = path.Join(optRegistry, optBaseImageName+":"+optEnv+"-build-"+buildNumber)
+	}
 	log.Printf("镜像完整名称: %s", opts.ImageName)
 
 	// load manifest

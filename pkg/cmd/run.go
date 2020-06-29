@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 func Run(name string, args ...string) (err error) {
@@ -17,4 +18,22 @@ func Run(name string, args ...string) (err error) {
 		log.Printf("执行完成: %d", ee.ExitCode())
 	}
 	return
+}
+
+func RunRetries(retry int, name string, args ...string) (err error) {
+	if retry < 1 {
+		retry = 1
+	}
+	for {
+		if err = Run(name, args...); err == nil {
+			return
+		}
+
+		retry--
+		if retry == 0 {
+			return
+		}
+		time.Sleep(time.Second * 5)
+		log.Printf("5s 后重试, 剩余 %d", retry)
+	}
 }

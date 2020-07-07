@@ -6,8 +6,9 @@ type Options struct {
 	ScriptKubeconfig   []byte
 	ScriptDockerconfig []byte
 
-	ImageName string
-	KeepImage bool
+	ImageName    string
+	ImageNameAlt string
+	KeepImage    bool
 
 	Namespace        string
 	Workload         string

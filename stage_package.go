@@ -24,5 +24,10 @@ func runPackageStage(opts Options) (err error) {
 	if err = cmd.RunDockerBuild(filename, opts.ImageName); err != nil {
 		return
 	}
+	if opts.ImageNameAlt != "" {
+		if err = cmd.RunDockerTag(opts.ImageName, opts.ImageNameAlt); err != nil {
+			return
+		}
+	}
 	return
 }

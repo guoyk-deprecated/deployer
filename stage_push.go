@@ -22,9 +22,19 @@ func runPushStage(opts Options) (err error) {
 	if err = cmd.RunDockerPush(opts.ImageName, dcdir); err != nil {
 		return
 	}
+	if opts.ImageNameAlt != "" {
+		if err = cmd.RunDockerPush(opts.ImageNameAlt, dcdir); err != nil {
+			return
+		}
+	}
 	if !opts.KeepImage {
 		if err = cmd.RunDockerRemoveImage(opts.ImageName); err != nil {
 			return
+		}
+		if opts.ImageNameAlt != "" {
+			if err = cmd.RunDockerRemoveImage(opts.ImageNameAlt); err != nil {
+				return
+			}
 		}
 	}
 	return

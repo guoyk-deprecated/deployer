@@ -157,8 +157,12 @@ func setup() (err error) {
 		opts.ImageName = path.Join(optRegistry, optBaseImageName+":"+optEnv)
 	} else {
 		opts.ImageName = path.Join(optRegistry, optBaseImageName+":"+optEnv+"-build-"+buildNumber)
+		opts.ImageNameAlt = path.Join(optRegistry, optBaseImageName+":"+optEnv)
 	}
 	log.Printf("镜像完整名称: %s", opts.ImageName)
+	if opts.ImageNameAlt != "" {
+		log.Printf("镜像别名: %s", opts.ImageNameAlt)
+	}
 
 	// load manifest
 	var mf Manifest

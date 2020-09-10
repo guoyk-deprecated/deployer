@@ -20,4 +20,6 @@ type Options struct {
 	RequestsMEM      string
 	LimitsCPU        string
 	LimitsMEM        string
+
+	ExtraAnnotations map[string]string
 }

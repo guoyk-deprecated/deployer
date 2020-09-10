@@ -10,6 +10,9 @@ import (
 )
 
 type Patch struct {
+	Metadata struct {
+		Annotations map[string]string `json:"annotations"`
+	} `json:"metadata"`
 	Spec struct {
 		Template struct {
 			Metadata struct {
@@ -58,6 +61,7 @@ func runDeployStage(opts Options) (err error) {
 
 	// build Patch struct
 	var p Patch
+	p.Metadata.Annotations = opts.ExtraAnnotations
 	p.Spec.Template.Metadata.Annotations.Timestamp = time.Now().Format(time.RFC3339)
 	for _, name := range opts.ImagePullSecrets {
 		secret := PatchImagePullSecret{Name: strings.TrimSpace(name)}

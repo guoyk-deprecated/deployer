@@ -141,6 +141,7 @@ func setup() (err error) {
 	if preset, err = LoadPreset(optCluster); err != nil {
 		return
 	}
+	opts.ExtraAnnotations = preset.ExtraAnnotations
 	opts.ImagePullSecrets = preset.ImagePullSecrets
 	opts.ScriptKubeconfig = preset.GenerateKubeconfig()
 	opts.ScriptDockerconfig = preset.GenerateDockerconfig()

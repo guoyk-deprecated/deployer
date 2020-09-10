@@ -11,8 +11,8 @@ import (
 
 type Patch struct {
 	Metadata struct {
-		Annotations map[string]string `json:"annotations"`
-	} `json:"metadata"`
+		Annotations map[string]string `json:"annotations,omitempty"`
+	} `json:"metadata,omitempty"`
 	Spec struct {
 		Template struct {
 			Metadata struct {

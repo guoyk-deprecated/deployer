@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -17,7 +16,6 @@ const (
 )
 
 type Manifest struct {
-	Version  int                 `yaml:"version"`
 	Build    []string            `yaml:"build"`
 	Package  []string            `yaml:"package"`
 	CPU      string              `yaml:"cpu"`
@@ -45,14 +43,14 @@ func loadLegacyManifestLines(filenames ...string) (lines []string) {
 }
 
 func LoadManifest(env string) (mf Manifest, err error) {
+	// check version
+	if err = checkManifestVersion("deployer.yml"); err != nil {
+		return
+	}
 	// load deployer.yml
 	var buf []byte
 	if buf, err = ioutil.ReadFile("deployer.yml"); err == nil {
 		if err = yaml.Unmarshal(buf, &mf); err != nil {
-			return
-		}
-		if mf.Version != 0 {
-			err = errors.New("deployer 不兼容 version: 2 的 deployer.yml 文件，请使用 deployer2")
 			return
 		}
 		mf = mf.Profile(env)

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"os"
 )
 
 type manifestVersionCheck struct {
@@ -13,6 +14,9 @@ type manifestVersionCheck struct {
 func checkManifestVersion(filename string) (err error) {
 	var buf []byte
 	if buf, err = ioutil.ReadFile(filename); err != nil {
+		if os.IsNotExist(err) {
+			err = nil
+		}
 		return
 	}
 	var m manifestVersionCheck

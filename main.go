@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"flag"
-	"go.guoyk.net/deployer/pkg/tempfile"
+	"github.com/guoyk93/deployer/pkg/tempfile"
 	"log"
 	"os"
 	"path"

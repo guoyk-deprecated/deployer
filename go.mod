@@ -1,4 +1,4 @@
-module go.guoyk.net/deployer
+module github.com/guoyk93/deployer
 
 go 1.12
 

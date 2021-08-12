@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"go.guoyk.net/deployer/pkg/cmd"
-	"go.guoyk.net/deployer/pkg/tempfile"
+	"github.com/guoyk93/deployer/pkg/cmd"
+	"github.com/guoyk93/deployer/pkg/tempfile"
 	"log"
 	"strings"
 	"time"

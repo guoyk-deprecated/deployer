@@ -5,7 +5,7 @@ func RunDockerVersion() error {
 }
 
 func RunDockerBuild(dockerFile, imageName string) error {
-	return Run("docker", "build", "-t", imageName, "-f", dockerFile, ".")
+	return Run("docker", "build", "--network", "host", "-t", imageName, "-f", dockerFile, ".")
 }
 
 func RunDockerTag(imageName string, imageNameAlt string) error {
